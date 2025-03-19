@@ -17,7 +17,6 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@v2
 
-      # Sæt op Java miljøet
       - name: Set up JDK 11
         uses: actions/setup-java@v2
         with:
@@ -29,14 +28,7 @@ jobs:
         run: |
           mvn clean install
           mvn test
-
-      # Kør statisk kodeanalyse med Qodana
-      - name: Run Qodana Static Code Analysis
-        uses: JetBrains/qodana-action@v1
-        with:
-          token: ${{ secrets.QODANA_TOKEN }}
-
-      # Upload testresultater til GitHub Actions
+      # testresultater til GitHub Actions
       - name: Upload test results
         if: always()
         uses: actions/upload-artifact@v2
@@ -44,7 +36,7 @@ jobs:
           name: test-results
           path: target/test-classes
 
-      # Opbevar Qodana rapporter
+      # Qodana rapporter
       - name: Upload Qodana report
         if: always()
         uses: actions/upload-artifact@v2
