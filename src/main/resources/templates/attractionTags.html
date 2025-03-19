@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="da" xmlns:th="https://www.thymeleaf.org">
+<head>
+  <meta charset="UTF-8">
+  <title>Attraktionens tags</title>
+  <link rel="stylesheet" type="text/css" th:href="@{/main.css}">
+</head>
+<div class="navbar">
+  <a href="/attractions">Hjem</a>
+</div>
+<body>
+<h1>Tags for <br> <span th:text="${name}"></span></h1>
+<div class="tags">
+<ul>
+  <li th:each="tag : ${tags}" th:text="${tag.getDisplayName()}" class="tag"></li>
+</ul>
+</div>
+
+<a th:href="@{/attractions/{name}(name=${attraction.name})}" class="Tilbage">Back</a>
+
+</body>
+</html>

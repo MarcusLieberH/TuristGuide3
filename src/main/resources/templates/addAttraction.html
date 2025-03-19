@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="da" xmlns:th="https://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Tilføj Attraktion</title>
+    <link rel="stylesheet" type="text/css" th:href="@{/main.css}">
+</head>
+<body>
+<div class="navbar a">
+    <a href="/attractions">Hjem</a>
+</div>
+<div class="container">
+    <h1>Tilføj en ny attraktion</h1>
+    <form action="#" th:action="@{/save}" th:object="${attraction}" method="post" class="TilfoejOgUpdate" enctype="multipart/form-data">
+        <label>Navn: <input type="text" name="name" placeholder="Indtast navn" required></label>
+        <label>Beskrivelse: <input type="text" name="description" placeholder="Indtast beskrivelse" required></label>
+        <label for="image">Billed-URL:</label>
+        <input type="text" id="image" name="image" placeholder="Indtast billede URL" required>
+
+        <label for="town">By:</label>
+        <select name="town" id="town" required>
+            <option value="" disabled selected>Vælg en by</option>
+            <option th:each="town : ${towns}" th:value="${town}" th:text="${town.displayName}"></option>
+        </select>
+
+        <label><strong>Tags:</strong></label>
+        <div class="checkbox-container">
+            <label th:each="tag : ${tags}">
+                <input type="checkbox" name="tags" th:value="${tag}" />
+                <span th:text="${tag.displayName}"></span>
+            </label>
+        </div>
+
+        <button type="submit">Gem</button>
+    </form>
+    <a href="/attractions">Tilbage</a>
+
+</div>
+</body>
+</html>

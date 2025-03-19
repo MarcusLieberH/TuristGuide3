@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="da" xmlns:th="https://www.thymeleaf.org">
+<head>
+  <meta charset="UTF-8">
+  <title>Tourist Guide</title>
+  <link rel="stylesheet" type="text/css" th:href="@{/main.css}">
+</head>
+<body>
+
+<h1>Velkommen til Turistguiden!</h1>
+<h3>Denne turistguide har attraktioner til folk i alle aldre! <br>
+  Er du til kultur? natur? et sus i mavsen? <br>
+  Så kom med en tur i gennem guiden og finde den perfekte attraktion til dig!</h3>
+<h2>Liste over attraktioner</h2>
+
+<div class="attraction-container">
+  <div class="attraction-card" th:each="attraction : ${attractions}"
+       th:style="|background-image: url('/images/${attraction.image}'); background-size: cover; background-position: center;|">
+    <h2 th:text="${attraction.name}"></h2>
+    <p th:text="${attraction.description}"></p>
+
+    <span class="location" th:text="${attraction.towns.displayName}"></span>
+
+    <div class="tags">
+      <span th:each="tag : ${attraction.tags}" th:text="${tag.displayName}" class="tag"></span>
+    </div>
+
+<div class="button-group">
+  <a th:href="@{/attractions/{name}(name=${attraction.name})}" class="details-btn">Se detaljer</a>
+  <form th:action="@{/attractions/delete/{name}(name=${attraction.name})}" method="post" style="display:flex;">
+  </form>
+</div>
+</div>
+</div>
+<a href="/add" class="add-btn">Tilføj ny attraktion</a>
+
+<footer>
+  <div class="container">
+    Kontakt os: Max Rytter: gå ind i den nærmeste kebabbutik! Najib Nawabi: nærmeste børnehave! Marcus Heilstrup: kontakt WoW Hardcore Guildleader i OnlyFangs
+  </div>
+</footer>
+</body>
+</html>

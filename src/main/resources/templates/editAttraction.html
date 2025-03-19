@@ -1,0 +1,42 @@
+  <!DOCTYPE html>
+<html lang="da" xmlns:th="https://www.thymeleaf.org">
+<head>
+  <meta charset="UTF-8">
+  <title>Opdater Attraktion</title>
+  <link rel="stylesheet" type="text/css" th:href="@{/main.css}">
+</head>
+<body>
+<div class="navbar">
+  <a href="/attractions">Hjem</a>
+</div>
+<div class="container">
+  <h1>Opdater attraktion</h1>
+  <form action="#" th:action="@{/update}" th:object="${attraction}" method="post" class="TilfoejOgUpdate">
+    <label>Navn: <input type="text" name="name" th:value="${attraction.name}" readonly required></label>
+    <label>Beskrivelse: <input type="text" name="description" th:value="${attraction.description}" required></label>
+    <label for="town">By:</label>
+    <select name="town" id="town" required>
+      <option value="" disabled selected th:if="${attraction.towns == null}">Vælg en by</option>
+      <option th:each="town : ${towns}"
+              th:value="${town}"
+              th:text="${town.displayName}"
+              th:selected="${town == attraction.towns}">
+      </option>
+    </select>
+
+    <div class="checkbox-container">
+      <label th:each="tag : ${tags}">
+        <input type="checkbox" name="tags" th:value="${tag}"
+               th:checked="${attraction.tags.contains(tag)}" />
+        <span th:text="${tag.getDisplayName}"></span>
+      </label>
+    </div>
+
+    <button type="submit">Gem ændringer</button>
+  </form>
+
+  <a href="/attractions">Tilbage</a>
+</div>
+
+</body>
+</html>

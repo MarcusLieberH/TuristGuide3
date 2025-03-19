@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="da" xmlns:th="https://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Attraktionsdetaljer</title>
+    <link rel="stylesheet" type="text/css" th:href="@{/main.css}">
+</head>
+<body>
+<div class="navbar">
+    <a href="/attractions">Hjem</a>
+</div>
+
+<h1 th:text="${attraction.name}"></h1>
+
+<div class="detail-container">
+    <img th:src="@{/images/{filename}(filename=${attraction.image})}" alt="Der er intet billede til attraktionen" style="width: 300px; height: 300px;">
+    <p th:text="${attraction.description}"></p>
+    <span class="location" th:text="${attraction.towns.getDisplayName()}"></span>
+    <div class="tags">
+        <span th:each="tag : ${attraction.tags}" th:text="${tag.getDisplayName()}" class="tag"></span>
+    <div class="button-group">
+        <a th:href="@{/attractions/{id}/edit(id=${attraction.name})}" class="edit-btn">Rediger</a>
+        <a th:href="@{/attractions/{name}/tags(name=${attraction.name})}" class="tags-btn">View Tags</a>
+        <form th:action="@{/attractions/delete/{id}(id=${attraction.name})}" method="post">
+            <button type="submit" class="delete-btn">Slet</button>
+        </form>
+    </div>
+</div>
+</div>
+
+
+</body>
+</html>
