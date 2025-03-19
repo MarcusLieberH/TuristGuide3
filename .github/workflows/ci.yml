@@ -33,14 +33,15 @@ jobs:
       # Upload testresultater
       - name: Upload test results
         if: always()
-        uses: actions/upload-artifact@v3
+        uses: actions/upload-artifact
         with:
           name: test-results
           path: target/test-classes
 
       - name: Upload Qodana report
         if: always()
-        uses: actions/upload-artifact@v3
+        uses: actions/upload-artifact
         with:
           name: qodana-report
           path: .qodana
+
