@@ -80,4 +80,10 @@ public class TouristController {
 
         return "redirect:/attractions";
     }
+    @GetMapping("/")
+    public String home() {
+        return "redirect:/attractions";
+    }
+
 }
+
